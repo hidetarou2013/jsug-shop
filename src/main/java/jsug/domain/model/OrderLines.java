@@ -1,13 +1,13 @@
 package jsug.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Stream;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 @Data
 @AllArgsConstructor
@@ -18,7 +18,12 @@ public class OrderLines implements Serializable {
         this(new ArrayList<>());
     }
 
-    public OrderLines orderId(UUID orderId) {
+    public OrderLines(ArrayList arrayList) {
+		// TODO 自動生成されたコンストラクター・スタブ
+    	this.list = arrayList;
+	}
+
+	public OrderLines orderId(UUID orderId) {
         int i = 0;
         for (OrderLine orderLine : list) {
             orderLine.setLineNo(++i);
@@ -36,4 +41,9 @@ public class OrderLines implements Serializable {
                 .mapToLong(OrderLine::getSubtotal)
                 .sum();
     }
+
+	public List<OrderLine> getList() {
+		return list;
+	}
+
 }

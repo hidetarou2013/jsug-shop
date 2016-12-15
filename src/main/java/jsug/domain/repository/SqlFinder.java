@@ -1,21 +1,25 @@
 package jsug.domain.repository;
 
-import lombok.extern.slf4j.Slf4j;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+
+import org.slf4j.Logger;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
 public class SqlFinder {
 
-    @Cacheable("sql")
+    private Logger log;
+
+	@Cacheable("sql")
     public String get(String path) {
         Resource resource = new ClassPathResource(path);
         log.info("load {}", resource);

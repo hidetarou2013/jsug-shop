@@ -1,13 +1,13 @@
 package jsug.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 @Data
 @AllArgsConstructor
@@ -18,7 +18,12 @@ public class Cart implements Serializable {
         this(new OrderLines());
     }
 
-    public Cart add(OrderLine orderLine) {
+    public Cart(OrderLines orderLines2) {
+		// TODO 自動生成されたコンストラクター・スタブ
+    	this.orderLines = orderLines2;
+	}
+
+	public Cart add(OrderLine orderLine) {
         // 対象の商品が既に買い物カゴに入っているか確認
         Optional<OrderLine> opt = orderLines.stream().filter(x ->
                 Objects.equals(x.getGoods().getGoodsId(), orderLine.getGoods().getGoodsId()))
@@ -49,7 +54,12 @@ public class Cart implements Serializable {
         return this;
     }
 
-    public boolean isEmpty() {
+    private OrderLines getOrderLines() {
+		// TODO 自動生成されたメソッド・スタブ
+		return this.orderLines;
+	}
+
+	public boolean isEmpty() {
         return orderLines.list.isEmpty();
     }
 }
